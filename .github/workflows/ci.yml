@@ -2,6 +2,8 @@ name: Deployment Render
 
 on:
   pull_request:
+    types:
+      - closed
   push:
     branches: [main]
 
@@ -11,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
