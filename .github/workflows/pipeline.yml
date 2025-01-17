@@ -1,9 +1,11 @@
 name: Deployment pipeline
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - main
+      - master
 
 jobs:
   simple_deployment_pipeline:
